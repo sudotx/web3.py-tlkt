@@ -1,16 +1,20 @@
 from web3 import Web3
 
-INFURA = 'https://goerli.infura.io/v3/e5b18908f978432c87e7c1dbd2027517'
+RPC_URL = 'http://127.0.0.1:8545'  # connected to anvil
+
 
 # connect to blockchain
-web3 = Web3(Web3.HTTPProvider(INFURA))
+
+web3 = Web3(Web3.HTTPProvider(RPC_URL))
 
 print(f'Connected: {web3.isConnected()}')
 
+# get Chain id
+print(f'Chain ID: {web3.eth.chainId}')
+
+
 # connect to contract
-target_address = web3.toChecksumAddress("")
-target_abi = ""
+# target_address = web3.toChecksumAddress("")
+# target_abi = ""
 
-target = web3.eth.contract(address=target_address, abi=target_abi)
-
-
+# target = web3.eth.contract(address=target_address, abi=target_abi)
