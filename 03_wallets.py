@@ -17,4 +17,4 @@ target_address = web3.eth.accounts[0]
 print(web3.fromWei(web3.eth.get_balance(target_address), 'ether'))
 
 # get bytecode if account is a CA, format bytecode to hex
-# print(web3.toHex(web3.eth.get_code(target_address)))
+print(web3.toHex(web3.eth.get_code(target_address)))

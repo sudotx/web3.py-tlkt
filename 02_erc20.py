@@ -15,7 +15,7 @@ target_abi = '[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"",
 # contract factory of address and abi attached
 target = web3.eth.contract(address=target_address, abi=target_abi)
 
-# name of erc 20
+# name of erc 20, this calls public functions on the target
 print(target.functions.name().call())
 # symbol of erc20
 print(target.functions.symbol().call())

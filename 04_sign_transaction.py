@@ -19,10 +19,10 @@ gas_estimate = web3.eth.generate_gas_price({
     'value': web3.toWei(1, 'ether')
 })
 
-# Build transaction object
+# Build transaction object, to send 1 ether from 1 user to  a sender
 transaction = {
     'from': FIRST_ACCOUNT,
-    'nonce': web3.eth.getTransactionCount(FIRST_ACCOUNT),
+    'nonce': web3.eth.get_transaction_count(FIRST_ACCOUNT),
     'to': SECOND_ACCOUNT,
     'value': web3.toWei(1, 'ether'),
     'gas': gas_estimate,
@@ -38,6 +38,6 @@ try:
 
     print(
         f"Transaction successful! Tx hash: {tx_receipt['transactionHash'].hex()}")
-    print(web3.eth.getTransaction(tx_receipt['transactionHash']))
+    print(web3.eth.get_transaction(tx_receipt['transactionHash']))
 except Exception as e:
     print(f"Error occurred: {e}")
