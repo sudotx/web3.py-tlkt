@@ -1,7 +1,7 @@
 from web3 import Web3
 import json
 import asyncio
-from websockets import connect  # type: ignore
+import websockets
 
 
 # ---------------------
@@ -27,14 +27,14 @@ def EventHandler(pending_tx):
     # get transaction receipt
     transaction = web3.eth.get_transaction(tx_hash)
     # check if transaction is to DAI contract
-    if print(transaction)['to'] == web3.to_checksum_address('0x6B175474E89094C44Da98b954EedeAC495271d0F'):
-        print('found a DAI transaction:...')
-        print(web3.to_hex(transaction['to']))
+    # if print(transaction)['to'] == web3.to_checksum_address('0x6B175474E89094C44Da98b954EedeAC495271d0F'):
+    #     print('found a DAI transaction:...')
+    #     print(web3.to_hex(transaction['to']))
 
 
 async def subscribePendingTx():
     # subscribe to pending transactions
-    async with connect(WS_RPC) as ws:
+    async with websockets.connect(WS_RPC) as ws:
         await ws.send(json.dumps({
             "jsonrpc": "2.0",
             "method": "eth_subscribe",
