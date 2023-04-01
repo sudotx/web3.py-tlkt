@@ -6,7 +6,7 @@ RPC_URL = 'http://127.0.0.1:8545'  # connected to anvil
 # connect to blockchain
 web3 = Web3(Web3.HTTPProvider(RPC_URL))
 
-print(f'Connected: {web3.isConnected()}')
+print(f'Connected: {web3.is_connected()}')
 
 # connect to wallet
 # target_address = web3.toChecksumAddress(
@@ -14,7 +14,7 @@ print(f'Connected: {web3.isConnected()}')
 
 target_address = web3.eth.accounts[0]
 # get eth balance of account
-print(web3.fromWei(web3.eth.get_balance(target_address), 'ether'))
+print(web3.from_wei(web3.eth.get_balance(target_address), 'ether'))
 
 # get bytecode if account is a CA, format bytecode to hex
-print(web3.toHex(web3.eth.get_code(target_address)))
+print(web3.to_hex(web3.eth.get_code(target_address)))

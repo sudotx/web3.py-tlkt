@@ -7,10 +7,10 @@ RPC_URL = 'http://127.0.0.1:8545'  # connected to anvil
 
 web3 = Web3(Web3.HTTPProvider(RPC_URL))
 
-print(f'Connected: {web3.isConnected()}')
+print(f'Connected: {web3.is_connected()}')
 
 # get Chain id
-print(f'Chain ID: {web3.eth.chainId}')
+print(f'Chain ID: {web3.eth.chain_id}')
 
 
 # connect to contract

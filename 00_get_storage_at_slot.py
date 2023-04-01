@@ -6,10 +6,10 @@ RPC_URL = 'http://ctf.mevsec.com:50046'
 web3 = Web3(Web3.HTTPProvider(RPC_URL))
 
 # Check if the connection with the node is successful or not
-print(f'Connected: {web3.isConnected()}')
+print(f'Connected: {web3.is_connected()}')
 
 # Set an address and abi of a smart contract that we'll use to interact with
-target_address = web3.toChecksumAddress(
+target_address = web3.to_checksum_address(
     '0x876807312079af775c49c916856A2D65f904e612')
 target_abi = '[{"inputs":[{"internalType":"string","name":"_key","type":"string"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"flag","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}]'
 
@@ -31,3 +31,5 @@ try:
     print(get_storage_at_slot(0))
 except Exception as e:
     print(f"Error occurred: {e}")
+
+# a single storage slot holds 32 bytes

@@ -16,7 +16,7 @@ web3 = Web3(Web3.HTTPProvider(RPC_URL))
 # Estimate gas required for the transaction
 gas_estimate = web3.eth.generate_gas_price({
     'to': SECOND_ACCOUNT,
-    'value': web3.toWei(1, 'ether')
+    'value': web3.to_wei(1, 'ether')
 })
 
 # Build transaction object, to send 1 ether from 1 user to  a sender
@@ -24,14 +24,14 @@ transaction = {
     'from': FIRST_ACCOUNT,
     'nonce': web3.eth.get_transaction_count(FIRST_ACCOUNT),
     'to': SECOND_ACCOUNT,
-    'value': web3.toWei(1, 'ether'),
+    'value': web3.to_wei(1, 'ether'),
     'gas': gas_estimate,
     'gasPrice': web3.eth.gas_price
 }
 
 try:
     # Sign and send transaction
-    tx_hash = web3.eth.sendTransaction(transaction, FIRST_ACCOUNT_PRIV)
+    tx_hash = web3.eth.send_transaction(transaction, FIRST_ACCOUNT_PRIV)
 
     # Wait for confirmation
     tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
