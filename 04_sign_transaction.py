@@ -22,7 +22,7 @@ gas_estimate = web3.eth.generate_gas_price({
 # Build transaction object, to send 1 ether from 1 user to  a sender
 transaction = {
     'from': FIRST_ACCOUNT,
-    'nonce': web3.eth.get_transaction_count(FIRST_ACCOUNT),
+    'nonce': web3.eth.get_transaction_count(web3.to_checksum_address(FIRST_ACCOUNT)),
     'to': SECOND_ACCOUNT,
     'value': web3.to_wei(1, 'ether'),
     'gas': gas_estimate,
@@ -31,7 +31,8 @@ transaction = {
 
 try:
     # Sign and send transaction
-    tx_hash = web3.eth.send_transaction(transaction, FIRST_ACCOUNT_PRIV)
+    tx_hash = web3.eth.send_transaction(
+        {'to': '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'})
 
     # Wait for confirmation
     tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)

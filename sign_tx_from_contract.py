@@ -14,40 +14,36 @@ web3 = Web3(Web3.HTTPProvider(RPC_URL))
 
 
 # Estimate gas required for the transaction
-gas_estimate = web3.eth.generate_gas_price({
-    'to': SECOND_ACCOUNT,
-    'value': web3.toWei(1, 'ether')
-})
-
 
 def get_contract_instance(address, target_abi):
-    target_address = web3.toChecksumAddress(address)
+    target_address = web3.to_checksum_address(address)
     return web3.eth.contract(address=target_address, abi=target_abi)
 
 
 target = get_contract_instance('0x5FbDB2315678afecb367f032d93F642f64180aa3',
                                '[{"inputs": [{"internalType": "string","name": "_key","type": "string"}],"stateMutability": "nonpayable","type": "constructor"},{"inputs": [],"name": "flag","outputs": [{"internalType": "string","name": "","type": "string"}],"stateMutability": "view","type": "function"}]')
 
-deposit_eth = target.functions.deposit().buildTransaction({
-    'from': FIRST_ACCOUNT,
-    'nonce': web3.eth.get_transaction_count(FIRST_ACCOUNT),
-    # this is the amount of eth you want to send to the contract, optional
-    'value': web3.toWei(1, 'ether'),
-    'gas': gas_estimate,
-    'gasPrice': web3.eth.gas_price
+deposit_eth = target.functions.deposit().build_transaction({
+    'value': web3.to_wei(1, 'ether'),
+    'chainId': 1337,
+    'nonce': web3.eth.get_transaction_count(web3.to_checksum_address(FIRST_ACCOUNT)),
+    'gas': 7000,
+    'gasPrice': web3.eth.gas_price,
 })
+
 # withdraw eth from contract
-withdraw_eth = target.functions.withdraw(100).buildTransaction({
-    'from': FIRST_ACCOUNT,
-    'nonce': web3.eth.get_transaction_count(FIRST_ACCOUNT),
-    'gas': gas_estimate,
-    'gasPrice': web3.eth.gas_price
+withdraw_eth = target.functions.withdraw(100).build_transaction({
+    'chainId': 1337,
+    'nonce': web3.eth.get_transaction_count(web3.to_checksum_address(FIRST_ACCOUNT)),
+    'gas': 7000,
+    'gasPrice': web3.eth.gas_price,
 })
 
 
 try:
     # Sign and send transaction
-    tx_hash = web3.eth.sendTransaction(deposit_eth, FIRST_ACCOUNT_PRIV)
+    tx_hash = web3.eth.send_transaction(
+        {'to': '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', 'data': deposit_eth})
 
     # Wait for confirmation
     tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
