@@ -32,7 +32,7 @@ transaction = {
 try:
     # Sign and send transaction
     tx_hash = web3.eth.send_transaction(
-        {'to': '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'})
+        transaction)
 
     # Wait for confirmation
     tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)

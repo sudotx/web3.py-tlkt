@@ -5,7 +5,7 @@ RPC_URL = 'https://mainnet.infura.io/v3/e5b18908f978432c87e7c1dbd2027517'
 # connect to blockchain
 web3 = Web3(Web3.HTTPProvider(RPC_URL))
 
-print(f'Connected: {web3.is_connected()}')
+print(f'Connected: {web3.is_connected()}')  # proof of life
 
 # contract details
 target_address = web3.to_checksum_address(
